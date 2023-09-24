@@ -1,0 +1,7 @@
+.vscode
+*.csv
+*.jpg
+*.txt
+*.xml
+/practice_problems
+
