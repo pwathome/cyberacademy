@@ -38,9 +38,10 @@ def check_mood():
         # close file
         file.close()
     # prints last saved date
-    print(f"\nLast mood check was on {file_data[0]}")
+    print("\n Last mood check was on",file_data[0],
+          "and you were having a",file_data[1],"day.")
     # ask user if they want to check mood
-    check_again = input("Would you like to do another mood check?\n"
+    check_again = input(" Would you like to do another mood check?\n"
                         "[Y|n]:").lower()
 
     if check_again == "y":
