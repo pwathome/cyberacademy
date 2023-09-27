@@ -7,7 +7,7 @@ mood_file = os.path.isfile("./how_was_your_day.txt")
 def ask_question():
     print("Welcome to mood checker!")
     while True:
-        question = input("Are you having a 'good' or 'bad' day? ").lower()
+        question = input("Are you having a 'good' or 'bad' day? ")
         # check that they used good or bad
         if question in ["good", "bad", ""]:
             # initialize todays time & date
