@@ -35,43 +35,55 @@ import os
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
-
-store_total = 0
 stores = []
 
 # Store class self, name, location, money
 class Store:
-    def __init__(self, name):
+    def __init__(self, name, location, money):
         self.name = name
-        # self.location = get_location(self)
-        # self.money = get_money(self)
+        self.location = location
+        self.money = money
 
 # get stores name
 def get_name():
     name = input("Enter store name: ")
-    print("Name: ",name)
+    print("Stores name: ",name)
     return name
 
-# # get stores location
-# def get_location(store):
-#     print("Stores location",store)
+# get stores location
+def get_location():
+    location = input("Enter store location: ")
+    print("Stores location",location)
+    return location
 
-# # get stores money
-# def get_money(store):
-#     print("Stores monies",store)
+# get stores money
+def get_money():
+    money = int(input("Enter store total: "))
+    print("Stores total",money)
+    return money
 
 
 # read store
 def get_stores(stores):
     for store in stores:
-        print("store(s)",store.name)
+        print("store(s)",store)
+    return stores
+        
 
 # create store
 def create_store():
     # check for store before creating
-    name = get_name()
-    stores.append(Store(name))
-
+    stores = []
+    # call create store
+    store = {
+        "name": get_name(),
+        "location": get_location(),
+        "money": get_money(),
+    }
+    # append store to stores array
+    stores.append(store)
+    # print created store
+    print("Created Store in create store",stores[0])
 
 # update store
 
