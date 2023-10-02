@@ -30,13 +30,16 @@
 
 # import os
 import os
+from os import path
+from datetime import datetime
 
 # clear function
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
-
+# empty stores array
 stores = []
-
+# variable to check if file exists
+stores_file = os.path.isfile("./stores.txt")
 # Store class self, name, location, money
 class Store:
     def __init__(self, name, location, money):
@@ -44,17 +47,20 @@ class Store:
         self.location = location
         self.money = money
 
+
 # get stores name
 def get_name():
     name = input("Enter store name: ")
     print("Stores name: ",name)
     return name
 
+
 # get stores location
 def get_location():
     location = input("Enter store location: ")
     print("Stores location",location)
     return location
+
 
 # get stores money
 def get_money():
@@ -83,15 +89,24 @@ def create_store():
     # append store to stores array
     stores.append(store)
     # print created store
-    print("Created Store in create store",stores[0])
+    
+    for s in store:
+        print("Store in create",s)
 
+    return stores
+
+    
 # update store
 
 # delete store
 
 def main():
-    create_store()
-    get_stores(stores)
+    # check for stores file
+    if stores_file == False:
+        create_store()
+    # otherwise get the stored stores
+    else:
+        get_stores(stores)
     
 
 # runs the program
