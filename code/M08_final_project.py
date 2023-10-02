@@ -36,8 +36,6 @@ from datetime import datetime
 # clear function
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
-# empty stores array
-stores = []
 # variable to check if file exists
 stores_file = os.path.isfile("stores_file.csv")
 print("File exist?:",stores_file)
@@ -58,14 +56,12 @@ def get_name(prompt):
 # get stores location
 def get_location(prompt):
     location = input(prompt)
-    # print("Stores location:",location)
     return location
 
 
 # get stores money
 def get_money(prompt):
     money = int(input(prompt))
-    # print("Stores total:",money)
     return money
 
 
@@ -76,7 +72,6 @@ def get_stores():
     with open("stores_file.csv") as file:
         for store in file:
             stores.append(store)
-
     return stores
 
 
@@ -93,9 +88,11 @@ def create_store():
     with open("stores_file.csv", "w") as file:
         file.write(new_store.name+",")
         file.write(new_store.location+",")
-        file.write(new_store.money+",")
+        file.write(new_store.money)
         file.close()
-        return
+        print(f"New store {new_store.name} created")
+        return file
+
     # return new store
     return new_store
     
