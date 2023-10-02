@@ -39,7 +39,8 @@ def clear():
 # empty stores array
 stores = []
 # variable to check if file exists
-stores_file = os.path.isfile("./stores.txt")
+stores_file = os.path.isfile("stores_file.csv")
+print("File exist?:",stores_file)
 # Store class self, name, location, money
 class Store:
     def __init__(self, name, location, money):
@@ -49,43 +50,43 @@ class Store:
 
 
 # get stores name
-def get_name():
-    name = input("Enter store name: ")
-    print("Stores name: ",name)
+def get_name(prompt):
+    name = input(prompt)
     return name
 
 
 # get stores location
-def get_location(prompt="Enter store location: "):
+def get_location(prompt):
     location = input(prompt)
     # print("Stores location:",location)
     return location
 
 
 # get stores money
-def get_money(prompt="Enter store total: "):
-    money = int(input(promt))
+def get_money(prompt):
+    money = int(input(prompt))
     # print("Stores total:",money)
     return money
 
 
 # get stores
 def get_stores():
-    # check for stores file
-    if stores_file == False:
-        print("No stores exist\n"
-              "Create one ?\n[Y|n]: ")
-    else:
-        print("Store file",store_file)
+    # empty stores array
+    stores = []
+    with open("stores_file.csv") as file:
+        for store in file:
+            stores.append(store)
+
+    return stores
 
 
 # get store by id
 
 # create store
 def create_store():
-    name = get_name()
-    location =  get_location()
-    money = str(get_money())
+    name = get_name("Enter store name: ")
+    location =  get_location("Enter store location: ")
+    money = str(get_money("Enter store total: "))
     # create new store with Store class
     new_store = Store(name, location, money)
     # save new store to csv
@@ -105,11 +106,22 @@ def create_store():
 def main():
     # check for stores file
     if stores_file == False:
-        create_store()
-    # otherwise get the stored stores
+        question = input("No stores exist\n"
+              "Create one ?\n[Y|n]: ").lower()
+        if question == "y":
+            create_store()
+        else:
+            print("Okay bye!")
+            print(get_stores())
     else:
-        get_stores(stores)
-    
+        print("Stores:",get_stores())
+        question = input("Want to add another store?\n"
+              "[Y|n]: ").lower()
+        if question == "y":
+            create_store()
+        else:
+            print("Okay bye!")
+
 
 # runs the program
 if __name__ == "__main__":
