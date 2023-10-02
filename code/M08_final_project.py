@@ -39,25 +39,47 @@ def clear():
 store_total = 0
 stores = []
 
-# Store class
+# Store class self, name, location, money
 class Store:
-    def __init__(self, name, location, money):
+    def __init__(self, name):
         self.name = name
-        self.location = location
-        self.money = money
+        # self.location = get_location(self)
+        # self.money = get_money(self)
 
-def get_store_name():
-    while True:
-        try:
-            name = input("Enter store name: ")
-            print(len(name))
-            if len(name) < 2:
-                print("Please enter a valid name")
-            else:
-                print("Please ")
+# get stores name
+def get_name():
+    name = input("Enter store name: ")
+    print("Name: ",name)
+    return name
+
+# # get stores location
+# def get_location(store):
+#     print("Stores location",store)
+
+# # get stores money
+# def get_money(store):
+#     print("Stores monies",store)
+
+
+# read store
+def get_stores(stores):
+    for store in stores:
+        print("store(s)",store.name)
+
+# create store
+def create_store():
+    # check for store before creating
+    name = get_name()
+    stores.append(Store(name))
+
+
+# update store
+
+# delete store
 
 def main():
-    get_store_name()
+    create_store()
+    get_stores(stores)
     
 
 # runs the program
