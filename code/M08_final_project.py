@@ -56,45 +56,47 @@ def get_name():
 
 
 # get stores location
-def get_location():
-    location = input("Enter store location: ")
-    print("Stores location",location)
+def get_location(prompt="Enter store location: "):
+    location = input(prompt)
+    # print("Stores location:",location)
     return location
 
 
 # get stores money
-def get_money():
-    money = int(input("Enter store total: "))
-    print("Stores total",money)
+def get_money(prompt="Enter store total: "):
+    money = int(input(promt))
+    # print("Stores total:",money)
     return money
 
 
-# read store
-def get_stores(stores):
-    for store in stores:
-        print("store(s)",store)
-    return stores
-        
+# get stores
+def get_stores():
+    # check for stores file
+    if stores_file == False:
+        print("No stores exist\n"
+              "Create one ?\n[Y|n]: ")
+    else:
+        print("Store file",store_file)
+
+
+# get store by id
 
 # create store
 def create_store():
-    # check for store before creating
-    stores = []
-    # call create store
-    store = {
-        "name": get_name(),
-        "location": get_location(),
-        "money": get_money(),
-    }
-    # append store to stores array
-    stores.append(store)
-    # print created store
-    
-    for s in store:
-        print("Store in create",s)
-
-    return stores
-
+    name = get_name()
+    location =  get_location()
+    money = str(get_money())
+    # create new store with Store class
+    new_store = Store(name, location, money)
+    # save new store to csv
+    with open("stores_file.csv", "w") as file:
+        file.write(new_store.name+",")
+        file.write(new_store.location+",")
+        file.write(new_store.money+",")
+        file.close()
+        return
+    # return new store
+    return new_store
     
 # update store
 
