@@ -37,7 +37,7 @@ from datetime import datetime
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 # variable to check if file exists
-stores_file = os.path.isfile("stores_file.csv")
+stores_file = os.path.isfile("stores_file.txt")
 print("File exist?:",stores_file)
 # Store class self, name, location, money
 class Store:
@@ -59,17 +59,38 @@ def get_location(prompt):
     return location
 
 
-# get stores money
-def get_money(prompt):
-    money = int(input(prompt))
-    return money
+# enter money function
+def add_money(prompt):
+    while prompt != "n":      
+        monies = []
+        # ask user what money they want to work with
+        add_money = input(prompt)
+        if add_money == "y":
+            money_choice = input("What type of money?\n"
+                              "a: hundreds, b: fifties \n")
+
+            for money in money_types:
+                key = money_types[money]["key"]
+                value = money_types[money]["value"]
+
+                if money_choice in ["a"]:
+                    print("Working with:",money)
+                    print("Worth:",value)
+                    how_many = int(input(f"How many {money}?: "))
+                    total = how_many * value
+                    print(f"Total for {key}'s Store: {total}")
+                    monies.append([{money: how_many},total])
+        else:
+            print("No monies okay bye!")
+        print(monies)
+        return monies
 
 
 # get stores
 def get_stores():
     # empty stores array
     stores = []
-    with open("stores_file.csv") as file:
+    with open("stores_file.txt") as file:
         for store in file:
             stores.append(store)
     return stores
@@ -81,18 +102,18 @@ def get_stores():
 def create_store():
     name = get_name("Enter store name: ")
     location =  get_location("Enter store location: ")
-    money = str(get_money("Enter store total: "))
+    money = add_money("Enter money?\n[Y|n]: ")
     # create new store with Store class
     new_store = Store(name, location, money)
     # save new store to csv
-    with open("stores_file.csv", "w") as file:
-        file.write(new_store.name+",")
-        file.write(new_store.location+",")
-        file.write(new_store.money)
-        file.close()
+    with open("stores_file.txt", "w") as file:
+        # file.write(new_store.name+",")
+        # file.write(new_store.location+",")
+        # file.write(new_store.money)
+        # file.close()
         print(f"New store {new_store.name} created")
         return file
-
+    print("New store:",new_store)
     # return new store
     return new_store
     
@@ -103,6 +124,7 @@ def create_store():
 def main():
     # check for stores file
     if stores_file == False:
+        # ask user if they want to create a new store
         question = input("No stores exist\n"
               "Create one ?\n[Y|n]: ").lower()
         if question == "y":
@@ -112,12 +134,32 @@ def main():
             print(get_stores())
     else:
         print("Stores:",get_stores())
+        # ask user if they want to add another store
         question = input("Want to add another store?\n"
               "[Y|n]: ").lower()
         if question == "y":
             create_store()
         else:
             print("Okay bye!")
+
+
+money_types = {
+        "hundreds": {
+                "key": "a",
+                "value": 100},
+        "fifties": {
+                "key": "b",
+                "value": 50},
+        "twenties": {
+                "key": "c",
+                "value": 20},
+        "tens": {
+                "key": "d",
+                "value": 10},
+        "one's": {
+                "key": "e",
+                "value": 1}
+        }
 
 
 # runs the program
