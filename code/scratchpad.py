@@ -31,8 +31,12 @@ def get_money():
             how_many = 2
             total = how_many * money_types[money]["value"]
             print(f"Total for {money}'s: {total}")
-            return total
+            # print(money_types.keys())
+            monies.append([{money: how_many},total])
+            
+            print(monies)
+            return monies
 
-        return money
+        return monies
 
 get_money()
